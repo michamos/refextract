@@ -49,7 +49,9 @@ from .text import extract_references_from_fulltext, rebuild_reference_lines
 def extract_references_from_url(url, headers=None, chunk_size=1024, **kwargs):
     """Extract references from the pdf specified in the url.
 
-    The first parameter is the path to the file
+    The first parameter is the URL of the file.
+    It returns a tuple (references, stats).
+
     It raises FullTextNotAvailable if the file does not exist.
 
     The standard reference format is: {title} {volume} ({year}) {page}.
@@ -104,7 +106,8 @@ def extract_references_from_file(path,
                                  override_kbs_files=None):
     """Extract references from a local pdf file.
 
-    The first parameter is the path to the file
+    The first parameter is the path to the file.
+    It returns a tuple (references, stats).
     It raises FullTextNotAvailable if the file does not exist.
 
     The standard reference format is: {title} {volume} ({year}) {page}.
@@ -121,7 +124,6 @@ def extract_references_from_file(path,
 
     >>> extract_references_from_file(path, override_kbs_files={'journals': 'my/path/to.kb'})
 
-    Returns a dictionary with extracted references and stats.
     """
     if not os.path.isfile(path):
         raise FullTextNotAvailable()
@@ -149,7 +151,8 @@ def extract_references_from_string(source,
                                    override_kbs_files=None):
     """Extract references from a raw string.
 
-    The first parameter is the path to the file
+    The first parameter is the path to the file.
+    It returns a tuple (references, stats).
     It raises FullTextNotAvailable if the file does not exist.
 
     If the string does not only contain references, improve accuracy by
